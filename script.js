@@ -27,7 +27,7 @@ document.querySelectorAll('.cell').forEach(cell => {
 });
 
 document.getElementById('submitMove').addEventListener('click', () => {
-    if (placements.length === 0) return alert("Place at least one tile.");
+    if (placements.length < 2) return alert("Place at least two tiles.");
     fetch('', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
