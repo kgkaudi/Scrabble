@@ -29,6 +29,7 @@ body {
     background-color: #ffc;
     border: 1px solid #888;
     cursor: grab;
+    position: relative;
 }
 
 #rack {
@@ -37,4 +38,12 @@ body {
 
 #scoreboard {
     margin-bottom: 10px;
+}
+
+.tilePoints{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px 4px;
+    font-size: 10px;
 }

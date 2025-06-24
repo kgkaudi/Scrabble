@@ -33,6 +33,20 @@ function drawTilesFromPool(&$pool, $num) {
     return $drawn;
 }
 
+function findPointsByLetter($letterArray, $letter) {
+    foreach ($letterArray as $key => $value) {
+        if ($key === $letter) {
+            return $value;
+        } elseif (is_array($value) || is_object($value)) {
+            $found = findPointsByLetter((array)$value, $letter);
+            if ($found !== null) {
+                return $found;
+            }
+        }
+    }
+    return null;
+}
+
 // Initialize players and board
 if (!isset($_SESSION['board'])) {
     $pool = [];
@@ -105,7 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="rack">
         <?php
         foreach ($_SESSION['players'][$_SESSION['turn']]['tiles'] as $letter) {
-            echo "<div class='tile' draggable='true' data-letter='$letter'>$letter</div>";
+            $points = findPointsByLetter($letterPoints, $letter);
+            echo "<div class='tile' draggable='true' data-letter='$letter'>$letter <span class='tilePoints'>$points</span></div>";
         }
         ?>
     </div>
