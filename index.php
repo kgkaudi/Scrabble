@@ -18,12 +18,38 @@ function drawTiles($num) {
     return $tiles;
 }
 
+$tileDistribution = [
+    'A' => 9, 'B' => 2, 'C' => 2, 'D' => 4, 'E' => 12,
+    'F' => 2, 'G' => 3, 'H' => 2, 'I' => 9, 'J' => 1,
+    'K' => 1, 'L' => 4, 'M' => 2, 'N' => 6, 'O' => 8,
+    'P' => 2, 'Q' => 1, 'R' => 6, 'S' => 4, 'T' => 6,
+    'U' => 4, 'V' => 2, 'W' => 2, 'X' => 1, 'Y' => 2, 'Z' => 1
+];
+
+function drawTilesFromPool(&$pool, $num) {
+    $drawn = [];
+    while (count($drawn) < $num && !empty($pool)) {
+        $index = array_rand($pool);
+        $letter = $pool[$index];
+        $drawn[] = $letter;
+        array_splice($pool, $index, 1);
+    }
+    return $drawn;
+}
+
 // Initialize players and board
 if (!isset($_SESSION['board'])) {
+    $pool = [];
+    foreach ($tileDistribution as $letter => $count) {
+        $pool = array_merge($pool, array_fill(0, $count, $letter));
+    }
+    shuffle($pool);
+
+    $_SESSION['pool'] = $pool;
     $_SESSION['board'] = array_fill(0, 15, array_fill(0, 15, ''));
     $_SESSION['players'] = [
-        ['tiles' => drawTiles(7), 'score' => 0],
-        ['tiles' => drawTiles(7), 'score' => 0]
+        ['tiles' => drawTilesFromPool($_SESSION['pool'], 7), 'score' => 0],
+        ['tiles' => drawTilesFromPool($_SESSION['pool'], 7), 'score' => 0]
     ];
     $_SESSION['turn'] = 0;
 }
@@ -45,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $_SESSION['players'][$current]['score'] += $turnPoints;
-    $_SESSION['players'][$current]['tiles'] = drawTiles(7); // Refill hand
+    $_SESSION['players'][$current]['tiles'] = drawTiles(7);$_SESSION['players'][$current]['tiles'] = drawTiles(7); // Refill hand
     $_SESSION['turn'] = 1 - $current;
 
     header('Content-Type: application/json');
