@@ -9,7 +9,6 @@ if (localStorage.getItem('remainingTiles') !== null) {
 
 let remainingTiles = document.getElementById("remainingTiles").textContent;
 if (remainingTiles < 7) {
-    console.log("out");
     const score1 = document.getElementById("score1").textContent;
     const score2 = document.getElementById("score2").textContent;
     if (score1 > score2){
