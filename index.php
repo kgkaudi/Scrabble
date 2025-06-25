@@ -6,10 +6,12 @@ $letters = json_decode($letters, true);
 
 $tileDistribution = [];
 $letterPoints = [];
+$remaining_tiles = 0;
 
 // Loop through letters
 foreach ($letters['letters'] as $key => $letter) {
     $tileDistribution[$key] = $letter['tiles'];
+    $remaining_tiles += $letter['tiles'];
     $letterPoints[$key] = $letter['points'];
 }
 
@@ -77,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($_SESSION['board'][$y][$x] === '') {
             $_SESSION['board'][$y][$x] = $letter;
             $turnPoints += $letterPoints[$letter];
-        }
+        }                
     }
 
     $_SESSION['players'][$current]['score'] += $turnPoints;
@@ -104,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="scoreboard">
         <div>Player 1: <span id="score1"><?= $_SESSION['players'][0]['score'] ?></span></div>
         <div>Player 2: <span id="score2"><?= $_SESSION['players'][1]['score'] ?></span></div>
+        <div>Tiles remaining: <span id="remainingTiles"><?= $remaining_tiles ?></span></div>        
         <div>Current Turn: Player <span id="current"><?= $_SESSION['turn'] + 1 ?></span></div>
         <div id="error-messages"></div>
     </div>
