@@ -27,7 +27,11 @@ document.querySelectorAll('.cell').forEach(cell => {
 });
 
 document.getElementById('submitMove').addEventListener('click', () => {
-    if (placements.length < 2) return alert("Place at least two tiles.");
+    if (placements.length < 2){
+        showMessage("Place at least two tiles.", 5000); // 5 seconds
+        return;
+    } 
+        
     fetch('', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -36,3 +40,20 @@ document.getElementById('submitMove').addEventListener('click', () => {
     .then(res => res.json())
     .then(data => location.reload());
 });
+
+function showMessage(message, duration = 3000) {
+  const messageBox = document.getElementById("error-messages");
+  messageBox.textContent = message;
+  messageBox.style.display = "block";
+
+  // Optional: Add some styling
+  messageBox.style.padding = "10px";
+  messageBox.style.color = "#f54242";
+  messageBox.style.margin = "10px 0";
+  messageBox.style.borderRadius = "5px";
+
+  // Hide the message after `duration` milliseconds
+  setTimeout(() => {
+    messageBox.style.display = "none";
+  }, duration);
+}

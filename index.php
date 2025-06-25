@@ -105,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div>Player 1: <span id="score1"><?= $_SESSION['players'][0]['score'] ?></span></div>
         <div>Player 2: <span id="score2"><?= $_SESSION['players'][1]['score'] ?></span></div>
         <div>Current Turn: Player <span id="current"><?= $_SESSION['turn'] + 1 ?></span></div>
+        <div id="error-messages"></div>
     </div>
     <div id="board">
         <?php
