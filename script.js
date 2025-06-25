@@ -1,12 +1,6 @@
 let draggedTile = null;
 let placements = [];
 
-document.querySelectorAll('.tile').forEach(tile => {
-    tile.addEventListener('dragstart', e => {
-        draggedTile = tile;
-    });
-});
-
 if (localStorage.getItem('remainingTiles') !== null) {
     // The key exists in localStorage
     let remainingTiles = localStorage.getItem('remainingTiles');
@@ -28,6 +22,12 @@ if (remainingTiles < 7) {
     showMessage(winMessage, "#229602",15000); // 15 seconds
     document.getElementById("submitMove").disabled = true;
 }
+
+document.querySelectorAll('.tile').forEach(tile => {
+    tile.addEventListener('dragstart', e => {
+        draggedTile = tile;
+    });
+});
 
 document.querySelectorAll('.cell').forEach(cell => {
     cell.addEventListener('dragover', e => e.preventDefault());
