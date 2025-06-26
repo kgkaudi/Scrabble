@@ -15,6 +15,7 @@ foreach ($letters['letters'] as $key => $letter) {
     $letterPoints[$key] = $letter['points'];
 }
 
+//used from refill
 function drawTiles($num) {
     $letters = array_keys($GLOBALS['letterPoints']);
     $tiles = [];
@@ -24,6 +25,7 @@ function drawTiles($num) {
     return $tiles;
 }
 
+//initialise
 function drawTilesFromPool(&$pool, $num) {
     $drawn = [];
     while (count($drawn) < $num && !empty($pool)) {
