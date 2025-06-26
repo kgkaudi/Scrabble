@@ -4,7 +4,7 @@ A typical scrabble game, that can be executed locally by putting docker-compose 
 
 File style.css contains all the styling contained in the page.
 
-File letters.js contains the letters with their respective points and how many are there from the beginning.
+File letters.json contains the letters with their respective points and how many are there from the beginning.
 
 File script.js contains the JavaScript logic in the code.
 First we check if the value remainingTiles (Which contains the number of remaining tiles after each submit) exists, and if so, we update that number to the remaining one. 
