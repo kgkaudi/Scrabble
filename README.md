@@ -14,7 +14,7 @@ Next, we have the code to update each cell, based on the letter we dropped. This
 The next bit contains the submit logic, which contains also the check of how many letters are dropped, and whether the submit is allowed or not.
 And finaly, we have a function for messages, which can get a message, a message colour and for how long will it last.
 
-File script.js contains the PHP login in the code.
+File index.php contains the PHP login in the code.
 First we get all the necessary details from the letters.json.
 There is a function to draw random tiles and another function that draws letters from the remaining ones.
 The next function is responsible for the scoring system.
